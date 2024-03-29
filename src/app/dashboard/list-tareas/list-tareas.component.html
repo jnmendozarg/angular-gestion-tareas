@@ -1,0 +1,30 @@
+<div class="card mt-4">
+    <div class="card-body">
+        <div class="input-group">
+            <input 
+                type="text" 
+                placeholder="Agregar tarea" 
+                class="form-control form-control-lg"
+                [(ngModel)]="tarea">
+            <div class="input-group-append">
+                <button type="button" class="btn btn-success btn-lg" 
+                (click)="agregarTarea()" [disabled]="tarea==''">Agregar</button>
+            </div>
+        </div>
+        <br>
+        <h5 *ngIf="listaTareas.length == 0" >No hay tareas para realizar</h5>
+        <ul class="list-group">
+            <li *ngFor=" let tarea of listaTareas; let i = index" 
+                class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="cursor" (click)="actualizarTarea(tarea, index)"
+                    [class.text-success]="tarea.finalizada"> <!--si hace click cambia a verde-->
+                    <i [ngClass]="tarea.finalizada ? 'fas fa-check-circle' : 'far fa-circle'"></i>
+                </span>
+                {{tarea.nombre}}
+                <span class="text-danger cursor" (click)="eliminarTarea(i)">
+                    <i class="far fa-trash-alt"></i>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
